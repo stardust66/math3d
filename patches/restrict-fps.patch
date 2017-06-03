@@ -1,0 +1,19 @@
+diff --git a/static/vendors/mathbox/mathbox-bundle.js b/static/vendors/mathbox/mathbox-bundle.js
+index 9f9fcf4..ab4f07c 100644
+--- a/static/vendors/mathbox/mathbox-bundle.js
++++ b/static/vendors/mathbox/mathbox-bundle.js
+@@ -42723,9 +42723,12 @@ THREE.Bootstrap.registerPlugin('loop', {
+     three.Loop.running = this.running = true;
+ 
+     var trigger = three.trigger.bind(three);
++
+     var loop = function () {
+-      this.running && requestAnimationFrame(loop);
+-      this.events.map(trigger);
++      setTimeout(function() {
++        this.running && requestAnimationFrame(loop);
++        this.events.map(trigger);
++      }.bind(this), 1000/30);
+     }.bind(this);
+ 
+     requestAnimationFrame(loop);
